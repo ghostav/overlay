@@ -12,7 +12,7 @@ EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
 
 LICENSE="MIT-with-advertising"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd"
 IUSE=""
 
 RDEPEND="media-libs/fontconfig

@@ -12,7 +12,7 @@ EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd"
 IUSE=""
 
 RDEPEND="x11-libs/libX11
