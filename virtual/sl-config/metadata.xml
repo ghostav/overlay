@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>proxy-maintainers</herd>
+<maintainer>
+    <email>ghostav@riseup.net</email>
+	<name>Jonas Rabenstein</name>
+	<description>Some modification for myself</description>
+</maintainer>
+<longdescription>metapacket to have a global configuration for the different suckless tools</longdescription>
+</pkgmetadata>

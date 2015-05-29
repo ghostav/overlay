@@ -3,11 +3,12 @@
 # $Header: /var/cvsroot/gentoo-x86/x11-wm/dwm/dwm-6.0.ebuild,v 1.13 2014/11/20 11:47:14 jer Exp $
 
 EAPI=5
-inherit eutils savedconfig toolchain-funcs
+inherit eutils git-r3 toolchain-funcs
 
+URI="192.168.178.10"
 DESCRIPTION="a dynamic window manager for X11"
 HOMEPAGE="http://dwm.suckless.org/"
-SRC_URI="http://gentoo:gentoo@192.168.178.10/cgit/suckless/${PN}/snapshot/${PN}-master.tar.bz2"
+EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
 
 LICENSE="MIT"
 SLOT="0"
@@ -17,19 +18,16 @@ IUSE="xinerama"
 RDEPEND="
 	x11-libs/libX11
 	xinerama? ( x11-libs/libXinerama )
+	virtual/sl-config
 "
 DEPEND="
 	${RDEPEND}
+	media-libs/libmpdclient
 	xinerama? ( x11-proto/xineramaproto )
 "
 
-src_unpack() {
-    unpack ${A}
-    mv "${PN}-master" "${S}"
-    cd "${S}"
-}
-
 src_prepare() {
+	cp "/etc/suckless/config.h" "../"
 	sed -i \
 		-e "s/CFLAGS = -std=c99 -pedantic -Wall -Os/CFLAGS += -std=c99 -pedantic -Wall/" \
 		-e "/^LDFLAGS/{s|=|+=|g;s|-s ||g}" \
@@ -37,14 +35,13 @@ src_prepare() {
 		-e "s/#XINERAMAFLAGS =/XINERAMAFLAGS ?=/" \
 		-e "s@/usr/X11R6/include@${EPREFIX}/usr/include/X11@" \
 		-e "s@/usr/X11R6/lib@${EPREFIX}/usr/lib@" \
-		-e "s@-I/usr/include@@" -e "s@-L/usr/lib@@" \
+		-e "s@-L/usr/lib@@" \
 		config.mk || die
 	sed -i \
 		-e '/@echo CC/d' \
 		-e 's|@${CC}|$(CC)|g' \
 		Makefile || die
 
-	restore_config config.h
 	epatch_user
 }
 
@@ -59,15 +56,10 @@ src_compile() {
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" install
 
-	#exeinto /etc/X11/Sessions
-	#newexe "${FILESDIR}"/dwm-session2 dwm
-
 	insinto /usr/share/xsessions
 	doins "${FILESDIR}"/dwm.desktop
 
 	dodoc README
-
-	save_config config.h
 }
 
 pkg_postinst() {
