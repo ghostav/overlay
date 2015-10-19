@@ -13,7 +13,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64"
 
-DEPEND="net-im/bitlbee[plugins]"
+DEPEND=">=net-im/bitlbee-3.4[plugins] >=dev-libs/json-glib-0.14.0"
 RDEPEND="net-im/bitlbee"
 
 pkg_pretend() {
