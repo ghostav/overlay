@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription lang="en">
+    ympd is a lightweight MPD (Music Player Daemon) web client that runs without a dedicated webserver or interpreters like PHP, NodeJS or Ruby. It's tuned for minimal resource usage and requires only very litte dependencies.
+  </longdescription>
+  <use>
+    <flag name='static'>Link libwebsockets statically</flag>
+  </use>
+</pkgmetadata>
+
