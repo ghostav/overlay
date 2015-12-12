@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+	<name>Jonas Rabenstein</name>
+	<email>jonas.rabenstein@web.de</email>
+</maintainer>
+<use>
+	<flag lang="en" name="udev">add an udev rule in order to get all ant usb sticks symlinked as /dev/ANT&lt;X&gt;</flag>
+</use>
+</pkgmetadata>
