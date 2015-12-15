@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 fcaps toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="simple X screen locker"
 HOMEPAGE="http://tools.suckless.org/slock"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -17,7 +16,7 @@ KEYWORDS="amd64 hppa x86 ~x86-fbsd"
 RDEPEND="
 	x11-libs/libX11
 	x11-libs/libXext
-	virtual/sl-config
+	dev-util/suckless-config
 "
 DEPEND="
 	${RDEPEND}
@@ -25,7 +24,7 @@ DEPEND="
 "
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 
 	sed -i \
 		-e '/^CFLAGS/{s: -Os::g; s:= :+= :g}' \

@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="a generic, highly customizable, and efficient menu for the X Window System"
 HOMEPAGE="http://tools.suckless.org/dmenu/"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,14 +17,14 @@ IUSE="xinerama"
 RDEPEND="
 	x11-libs/libX11
 	xinerama? ( x11-libs/libXinerama )
-	virtual/sl-config
+	dev-util/suckless-config
 "
 DEPEND="${RDEPEND}
 	xinerama? ( virtual/pkgconfig )
 "
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 	# Respect our flags
 	sed -i \
 		-e '/^CFLAGS/{s|=.*|+= -ansi -pedantic -Wall $(INCS) $(CPPFLAGS)|}' \

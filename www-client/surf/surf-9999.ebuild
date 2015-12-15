@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="a simple web browser based on WebKit/GTK+"
 HOMEPAGE="http://surf.suckless.org/"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,7 +26,7 @@ DEPEND="
 "
 RDEPEND="
 	!sci-chemistry/surf
-	virtual/sl-config
+	dev-util/suckless-config
 	${COMMON_DEPEND}
 	x11-apps/xprop
 	x11-misc/dmenu
@@ -36,7 +35,7 @@ RDEPEND="
 "
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 	epatch "${FILESDIR}"/${P}-gentoo.patch
 	epatch_user
 	tc-export CC PKG_CONFIG

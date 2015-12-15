@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="a dynamic window manager for X11"
 HOMEPAGE="http://dwm.suckless.org/"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -18,7 +17,7 @@ IUSE="xinerama"
 RDEPEND="
 	x11-libs/libX11
 	xinerama? ( x11-libs/libXinerama )
-	virtual/sl-config
+	dev-util/suckless-config
 "
 DEPEND="
 	${RDEPEND}
@@ -27,7 +26,7 @@ DEPEND="
 "
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 	sed -i \
 		-e "s/CFLAGS = -std=c99 -pedantic -Wall -Os/CFLAGS += -std=c99 -pedantic -Wall/" \
 		-e "/^LDFLAGS/{s|=|+=|g;s|-s ||g}" \

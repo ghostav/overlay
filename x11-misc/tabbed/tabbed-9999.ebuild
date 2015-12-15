@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="Simple generic tabbed fronted to xembed aware applications"
 HOMEPAGE="http://tools.suckless.org/tabbed"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -16,14 +15,14 @@ KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd"
 IUSE=""
 
 RDEPEND="x11-libs/libX11
-	virtual/sl-config"
+	dev-util/suckless-config"
 DEPEND="
 	x11-proto/xproto
 	${RDEPEND}
 "
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 	sed config.mk \
 		-e '/^CC/d' \
 		-e 's|/usr/local|/usr|g' \

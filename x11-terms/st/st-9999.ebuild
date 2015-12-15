@@ -5,10 +5,9 @@
 EAPI=5
 inherit eutils git-r3 toolchain-funcs
 
-URI="192.168.178.10"
 DESCRIPTION="simple terminal implementation for X"
 HOMEPAGE="http://st.suckless.org/"
-EGIT_REPO_URI="git+ssh://git@${URI}/suckless/${PN}"
+EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
 
 LICENSE="MIT-with-advertising"
 SLOT="0"
@@ -19,7 +18,7 @@ RDEPEND="media-libs/fontconfig
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXft
-	virtual/sl-config"
+	dev-util/suckless-config"
 DEPEND="${RDEPEND}
 	sys-libs/ncurses
 	virtual/pkgconfig
@@ -27,7 +26,7 @@ DEPEND="${RDEPEND}
 	x11-proto/xproto"
 
 src_prepare() {
-	cp "/etc/suckless/config.h" "../"
+	find . -type f -exec sed -i 's|"../config.h"|<suckless.h>|g' {} +
 	sed -e '/^CFLAGS/s:[[:space:]]-Wall[[:space:]]: :' \
 		-e '/^CFLAGS/s:[[:space:]]-O[^[:space:]]*[[:space:]]: :' \
 		-e '/^LDFLAGS/{s:[[:space:]]-s[[:space:]]: :}' \
