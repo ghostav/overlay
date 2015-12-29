@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+OpenJK is an effort by the JACoders group to maintain and improve the game engines on which the Jedi Academy (JA) and Jedi Outcast (JO) games run on, while maintaining full backwards compatibility with the existing games. This project does not attempt to rebalance or otherwise modify core gameplay.
+  </longdescription>
+  <use>
+    <flag name='system-sdl2'>Use the system-wide media-libs/libsdl2 instead of bundled.</flag>
+    <flag name='system-openal'>Use the system-wide media-libs/libopenal instead of bundled.</flag>
+    <flag name='system-png'>Use the system-wide media-libs/libpng instead of bundled.</flag>
+    <flag name='system-jpeg'>Use the system-wide media-libs/{libjpeg-turbo,jpeg,openjpeg} instead of bundled.</flag>
+    <flag name='system-zlib'>Use the system-wide sys-libs/zlib instead of bundled.</flag>
+    <flag name='outcat'>Build singleplayer binary for Jedi Outcast</flag>
+    <flag name='academy'>Build singleplayer binary for Jedi Academy</flag>
+    <flag name='client'>Build multiplayer client binary for Jedi Academy</flag>
+    <flag name='server'>Build dedicated server binary for Jedi Academy</flag>
+  </use>
+</pkgmetadata>
+

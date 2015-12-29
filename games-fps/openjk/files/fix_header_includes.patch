@@ -1,0 +1,37 @@
+diff --git a/codeJK2/cgame/FxScheduler.h b/codeJK2/cgame/FxScheduler.h
+index 26bed86..d870407 100644
+--- a/codeJK2/cgame/FxScheduler.h
++++ b/codeJK2/cgame/FxScheduler.h
+@@ -26,6 +26,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
+ 
+ 
+ #include "../../code/qcommon/sstring.h"
++#include "../game/genericparser2.h"
+ typedef sstring_t fxString_t;
+ 
+ #ifndef FX_SCHEDULER_H_INC
+diff --git a/codeJK2/game/genericparser2.cpp b/codeJK2/game/genericparser2.cpp
+index 50bba88..0f37864 100644
+--- a/codeJK2/game/genericparser2.cpp
++++ b/codeJK2/game/genericparser2.cpp
+@@ -25,6 +25,7 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
+ #else
+ #include "g_headers.h"
+ #endif
++#include "genericparser2.h"
+ 
+ #define MAX_TOKEN_SIZE	1024
+ static char	token[MAX_TOKEN_SIZE];
+diff --git a/codeJK2/game/genericparser2.h b/codeJK2/game/genericparser2.h
+index c3d0988..f954f7f 100644
+--- a/codeJK2/game/genericparser2.h
++++ b/codeJK2/game/genericparser2.h
+@@ -63,7 +63,7 @@ public:
+ 	char		*GetPool(void) { return mPool; }
+ 	int			GetUsed(void) { return mUsed; }
+ 
+-	char		*AllocText(char *text, bool addNULL = true, CTextPool **poolPtr = 0);
++	char		*AllocText(const char *text, bool addNULL = true, CTextPool **poolPtr = 0);
+ };
+ 
+ void CleanTextPool(CTextPool *pool);
