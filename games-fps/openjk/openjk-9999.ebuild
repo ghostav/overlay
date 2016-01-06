@@ -31,10 +31,6 @@ DEPEND="
 	${RDEPEND}
 "
 
-src_prepare() {
-	epatch ${FILESDIR}/fix_header_includes.patch
-}
-
 src_configure() {
 	CFLAGS="${CFLAGS} -std=c99"
 	local mycmakeargs=(
@@ -70,11 +66,11 @@ src_install() {
 	use outcast && \
 		games_make_wrapper openjo ${GAMES_DATADIR}/JediOutcast/openjo_sp.x86_64 ${GAMES_DATADIR}/JediOutcast ${GAMES_DATADIR}/JediOutcast
 	use academy && \
-		games_make_wrapper openjk ${GAMES_DATADIR}/JediAcademy/openjk_sp.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
+		games_make_wrapper openja ${GAMES_DATADIR}/JediAcademy/openjk_sp.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
 	use client && \
-		games_make_wrapper openjk_mp ${GAMES_DATADIR}/JediAcademy/openjk.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
+		games_make_wrapper openja_client ${GAMES_DATADIR}/JediAcademy/openjk.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
 	use server && \
-		games_make_wrapper openjk_server ${GAMES_DATADIR}/JediAcademy/openjkded.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
+		games_make_wrapper openja_server ${GAMES_DATADIR}/JediAcademy/openjkded.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
 
 	prepgamesdirs
 }
