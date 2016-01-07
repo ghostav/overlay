@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit games git-r3 eutils cmake-utils
+inherit games git-r3 eutils cmake-utils pax-utils
 
 DESCRIPTION="Community effort to maintain and improve Jedi Academy + Jedi Outcast released by Raven Software "
 HOMEPAGE="https://openjk.org"
@@ -63,14 +63,22 @@ src_install() {
 	cmake-utils_src_install
 
 	# TODO: x86_64 with real arch
-	use outcast && \
+	if use outcast ; then
 		games_make_wrapper openjo ${GAMES_DATADIR}/JediOutcast/openjo_sp.x86_64 ${GAMES_DATADIR}/JediOutcast ${GAMES_DATADIR}/JediOutcast
-	use academy && \
+		pax-mark m ${D}${GAMES_DATADIR}/JediOutcast/openjo_sp.x86_64
+	fi
+	if use academy ; then
 		games_make_wrapper openja ${GAMES_DATADIR}/JediAcademy/openjk_sp.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
-	use client && \
+		pax-mark m ${D}${GAMES_DATADIR}/JediAcademy/openjk_sp.x86_64
+	fi
+	if use client ; then
 		games_make_wrapper openja_client ${GAMES_DATADIR}/JediAcademy/openjk.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
-	use server && \
+		pax-mark m ${D}${GAMES_DATADIR}/JediAcademy/openjk.x86_64
+	fi
+	if use server ; then
 		games_make_wrapper openja_server ${GAMES_DATADIR}/JediAcademy/openjkded.x86_64 ${GAMES_DATADIR}/JediAcademy ${GAMES_DATADIR}/JediAcademy
+		pax-mark m ${D}${GAMES_DATADIR}/JediAcademy/openjkded.x86_64
+	fi
 
 	prepgamesdirs
 }
