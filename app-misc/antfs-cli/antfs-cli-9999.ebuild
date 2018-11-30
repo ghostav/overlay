@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python2_7 python3_3 python3_4 )
+PYTHON_COMPAT=( python{2_7,3_3,3_5,3_6,3_7} )
 inherit git-r3 eutils udev distutils-r1
 
 DESCRIPTION="Extracts FIT files from ANT-FS based sport watches such as Garmin Forerunner 60, 405CX, 310XT, 610 and 910XT."

@@ -7,7 +7,8 @@ inherit eutils git-r3 fcaps toolchain-funcs
 
 DESCRIPTION="simple X screen locker"
 HOMEPAGE="http://tools.suckless.org/slock"
-EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
+#EGIT_REPO_URI="https://git.ghostav.ddnss.de/code/${PN}.git"
+EGIT_REPO_URI="http://git.suckless.org/${PN}"
 
 LICENSE="MIT"
 SLOT="0"
@@ -16,7 +17,6 @@ KEYWORDS="amd64 hppa x86 ~x86-fbsd"
 RDEPEND="
 	x11-libs/libX11
 	x11-libs/libXext
-	dev-util/suckless-config
 "
 DEPEND="
 	${RDEPEND}
@@ -52,5 +52,5 @@ pkg_postinst() {
 	# cap_dac_read_search used to be enough for shadow access
 	# but now slock wants to write to /proc/self/oom_score_adj
 	# and for that it needs:
-	fcaps cap_dac_override,cap_sys_resource /usr/bin/slock
+	fcaps cap_dac_override,cap_sys_resource,cap_setuid,cap_setgid /usr/bin/slock
 }
