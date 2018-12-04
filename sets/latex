@@ -1,0 +1,10 @@
+virtual/latex-base
+dev-tex/latexmk
+dev-tex/latex-beamer
+dev-tex/minted
+dev-tex/biber
+dev-texlive/texlive-latexextra
+dev-texlive/texlive-mathscience
+dev-texlive/texlive-fontsextra
+dev-texlive/texlive-bibtexextra
+dev-texlive/texlive-langgerman
