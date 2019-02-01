@@ -1,0 +1,6 @@
+-*app-editors/nano
+*app-editors/vim
+app-shells/zsh
+dev-vcs/git
+sys-kernel/gentoo-sources
+sys-apps/fakeroot
