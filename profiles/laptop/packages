@@ -1,3 +1,2 @@
 net-misc/networkmanager
-x11-base/xorg-server
-x11-wm/i3
+@x11
