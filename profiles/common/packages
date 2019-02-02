@@ -5,4 +5,3 @@ dev-vcs/git
 sys-kernel/gentoo-sources
 app-misc/tmux
 app-text/tree
-@admin
