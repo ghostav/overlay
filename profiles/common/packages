@@ -3,7 +3,4 @@
 app-shells/zsh
 dev-vcs/git
 sys-kernel/gentoo-sources
-sys-apps/fakeroot
-app-portage/eix
-app-portage/portage-utils
-app-eselect/eselect-repository
+@admin

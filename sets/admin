@@ -1,0 +1,6 @@
+sys-apps/fakeroot
+app-admin/sudo
+app-portage/eix
+app-portage/portage-utils
+app-eselect/eselect-repository
+app-portage/gentoolkit
