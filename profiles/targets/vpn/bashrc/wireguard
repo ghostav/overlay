@@ -1,0 +1,44 @@
+[[ "${EBUILD_PHASE}" = 'prepare' ]] || return
+
+[[ "${CATEGORY}" = sys-kernel ]] \
+	|| die "$0: must be called for kernel package"
+[[ "${PN}" = *sources ]] \
+	|| die "$0: must be called for sources package"
+
+# 1:wiregard-path
+function __ghostav_bashrc_vpn_wireguard_makefile() {
+	local line="obj-\$(CONIG_WIREGUARD)	+= ${1}"
+	[[ -f "${S}/net/Makefile" ]] || die "${0}: could not find net/Makefile"
+	if grep -qF "${line}" "${S}/net/Makefile"
+	then
+		ewarn "${0}: wireguard already in net/Makefile"
+		return
+	fi
+	echo "${line}" >> "${S}/net/Makefile"
+	einfo "${0}: added wireguard to net/Makefile"
+}
+# 1:wireguard-path
+function __ghostav_bashrc_vpn_wireguard_kconfig() {
+	local line="source \"${1}/Kconfig\""
+	[[ -f "${1}/Kconfig" ]] || die "${0}: no Kconfig in ${1}"
+	[[ -f "${S}/net/Kconfig" ]] || die "${0}: could not find net/Kconfig"
+	if grep -qF "${line}" "${S}/net/Kconfig"
+	then
+		ewarn "${0}: wireguard already source in net/Kconfig"
+		return
+	fi
+	sed -i "/^source \"net\/ipv4\/Kconfig\"\$/a ${line}" "${S}/net/Kconfig"
+
+	grep -qF "${line}" "${S}/net/Kconfig" \
+		|| die "${0}: failed to insert wireguard in net/Kconfig"
+	einfo "${0}: inserted wireguard in net/Kconfig"
+}
+
+# 1:wireguard-path
+function __ghostav_bashrc_vpn_wireguard() {
+	[[ -e "${1}" ]] || die "$0: could not find wireguard source"
+	__ghostav_bashrc_vpn_wireguard_makefile	"${1}"
+	__ghostav_bashrc_vpn_wireguard_kconfig	"${1}"
+}
+
+__ghostav_bashrc_vpn_wireguard "/usr/src/wireguard"
