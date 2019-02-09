@@ -7,7 +7,7 @@
 
 # 1:wiregard-path
 function __ghostav_bashrc_vpn_wireguard_makefile() {
-	local line="obj-\$(CONIG_WIREGUARD)	+= ${1}"
+	local line="obj-\$(CONIG_WIREGUARD)	+= $(basename "${1}")"
 	[[ -f "${S}/net/Makefile" ]] || die "${0}: could not find net/Makefile"
 	if grep -qF "${line}" "${S}/net/Makefile"
 	then
@@ -28,6 +28,7 @@ function __ghostav_bashrc_vpn_wireguard_kconfig() {
 		return
 	fi
 	sed -i "/^source \"net\/ipv4\/Kconfig\"\$/a ${line}" "${S}/net/Kconfig"
+	dosym "${1}" "${S}/net/wireguard"
 
 	grep -qF "${line}" "${S}/net/Kconfig" \
 		|| die "${0}: failed to insert wireguard in net/Kconfig"
