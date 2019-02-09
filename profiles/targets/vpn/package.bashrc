@@ -1,1 +1,1 @@
-sys-kernel/*-sources	install
+sys-kernel/*-sources	wireguard
