@@ -1,3 +1,4 @@
 x11-base/xorg-server
 x11-wm/i3
 x11-misc/rofi
+x11-misc/i3status
