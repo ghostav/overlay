@@ -7,7 +7,7 @@
 
 # 1:wiregard-path
 function __ghostav_bashrc_vpn_wireguard_makefile() {
-	local line="obj-\$(CONIG_WIREGUARD)	+= $(basename "${1}")"
+	local line="obj-\$(CONFIG_WIREGUARD) += $(basename "${1}")"
 	[[ -f "${S}/net/Makefile" ]] || die "${0}: could not find net/Makefile"
 	if grep -qF "${line}" "${S}/net/Makefile"
 	then
@@ -28,7 +28,6 @@ function __ghostav_bashrc_vpn_wireguard_kconfig() {
 		return
 	fi
 	sed -i "/^source \"net\/ipv4\/Kconfig\"\$/a ${line}" "${S}/net/Kconfig"
-	dosym "${1}" "${S}/net/wireguard"
 
 	grep -qF "${line}" "${S}/net/Kconfig" \
 		|| die "${0}: failed to insert wireguard in net/Kconfig"
@@ -36,10 +35,24 @@ function __ghostav_bashrc_vpn_wireguard_kconfig() {
 }
 
 # 1:wireguard-path
+function __ghostav_bashrc_vpn_wireguard_symlink() {
+	local target="/usr/src/linux-${KV_FULL}/net/wireguard"
+	if [[ -d "${target}" ]] ; then
+		ewarn "wireguard is already a directory - was it merged?"
+	elif [[ -L "${target}" ]] ; then
+		ewarn "wireguard is already linked"
+	else
+		einfo "symlink '${1}' at '${target}'"
+		dosym "${1}" "${target}"
+	fi
+}
+
+# 1:wireguard-path
 function __ghostav_bashrc_vpn_wireguard() {
 	[[ -e "${1}" ]] || die "$0: could not find wireguard source"
 	__ghostav_bashrc_vpn_wireguard_makefile	"${1}"
 	__ghostav_bashrc_vpn_wireguard_kconfig	"${1}"
+	__ghostav_bashrc_vpn_wireguard_symlink  "${1}"
 }
 
 __ghostav_bashrc_vpn_wireguard "/usr/src/wireguard"
