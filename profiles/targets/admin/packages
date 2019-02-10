@@ -5,3 +5,4 @@ app-portage/portage-utils
 app-eselect/eselect-repository
 app-portage/gentoolkit
 sys-process/lsof
+app-admin/pass
