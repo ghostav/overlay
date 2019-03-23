@@ -1,0 +1,24 @@
+[[ "${CATEGORY}" == 'dev-libs' -a "${PN}" == 'mesh' ]] && return 0
+
+case "${EBUILD_PHASE}" in
+setup)
+	IUSE="${IUSE} +mesh"
+	MESH_DEPEND="mesh? dev-libs/mesh"
+	DEPEND="${DEPEND}
+		mesh? ( dev-libs/mesh )
+	"
+	RDEPEND="${RDEPEND}
+		mesh? ( dev-libs/mesh )
+	"
+
+configure)
+	if ! use mesh ; then
+		;
+	elif [[ "$LDFLAGS" == *"-lmesh"* ]] ; then
+		einfo "mesh allocator already in linkflags"
+	else
+		einfo "add mesh allocator linker flags"
+		LDFLAGS="${LDFLAGS} -lmesh"
+	fi
+	;;
+esac
