@@ -1,0 +1,3 @@
+dev-libs/mesh	-mesh
+## TODO: check which packages actually benefit from mesh
+*/*	mesh
