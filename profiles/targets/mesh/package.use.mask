@@ -1,1 +1,2 @@
 dev-libs/mesh	mesh
+*/* tcmalloc jemalloc
