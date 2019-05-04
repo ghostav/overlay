@@ -1,4 +1,4 @@
-[[ "${EBUILD_PHASE}" = 'prepare' ]] || return
+[[ "${EBUILD_PHASE}" = 'compile' ]] || return
 
 [[ "${CATEGORY}" = sys-kernel ]] \
 	|| die "$0: must be called for kernel package"
@@ -7,7 +7,7 @@
 
 # 1:wiregard-path
 function __ghostav_bashrc_vpn_wireguard_makefile() {
-	local line="obj-\$(CONFIG_WIREGUARD) += $(basename "${1}")"
+	local line="obj-\$(CONFIG_WIREGUARD) += wireguard/"
 	[[ -f "${S}/net/Makefile" ]] || die "${0}: could not find net/Makefile"
 	if grep -qF "${line}" "${S}/net/Makefile"
 	then
@@ -36,14 +36,14 @@ function __ghostav_bashrc_vpn_wireguard_kconfig() {
 
 # 1:wireguard-path
 function __ghostav_bashrc_vpn_wireguard_symlink() {
-	local target="/usr/src/linux-${KV_FULL}/net/wireguard"
+	local target="${S}/net/wireguard"
 	if [[ -d "${target}" ]] ; then
 		ewarn "wireguard is already a directory - was it merged?"
 	elif [[ -L "${target}" ]] ; then
 		ewarn "wireguard is already linked"
 	else
 		einfo "symlink '${1}' at '${target}'"
-		dosym "${1}" "${target}"
+		ln -s "${1}" "${target}"
 	fi
 }
 
