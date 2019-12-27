@@ -1,1 +1,2 @@
 net-vpn/wireguard	-module tools
+net-vpn/wireguard-modules	module-src
