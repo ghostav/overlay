@@ -1,7 +1,9 @@
+app-emulation/qemu
+
+## octopos
 dev-perl/File-Find-Rule
-cross-sparc-unknown-elf/gcc
 app-doc/doxygen
 
 ## demo3 / swex10-visualization
-kde-frameworkds/extra-cmake-modules
+kde-frameworks/extra-cmake-modules
 media-libs/glew
