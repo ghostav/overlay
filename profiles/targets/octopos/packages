@@ -4,3 +4,4 @@ app-doc/doxygen
 
 ## demo3 / swex10-visualization
 kde-frameworkds/extra-cmake-modules
+media-libs/glew
