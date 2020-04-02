@@ -5,6 +5,14 @@
 [[ "${PN}" = *sources ]] \
 	|| die "$0: must be called for sources package"
 
+case "${PV}" in
+[1234].*|5.[12345]|5.[12345][.-]*)
+	;;
+*)	einfo "${0}: wireguard is already present in ${PV}"
+	return
+	;;
+esac
+
 # 1:wiregard-path
 function __ghostav_bashrc_vpn_wireguard_makefile() {
 	local line="obj-\$(CONFIG_WIREGUARD) += wireguard/"
