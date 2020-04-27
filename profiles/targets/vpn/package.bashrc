@@ -1,1 +1,0 @@
-sys-kernel/*-sources	wireguard
